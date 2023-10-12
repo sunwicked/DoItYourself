@@ -1,4 +1,4 @@
-package com.weather.compose.ui.theme
+package com.movie.compose.ui.theme
 
 import android.app.Activity
 import android.os.Build
@@ -38,7 +38,7 @@ private val LightColorScheme = lightColorScheme(
 )
 
 @Composable
-fun WeatherComposeTheme(
+fun MovieComposeTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,

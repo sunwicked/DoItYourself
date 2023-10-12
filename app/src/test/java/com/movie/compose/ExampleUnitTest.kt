@@ -1,4 +1,4 @@
-package com.weather.compose
+package com.movie.compose
 
 import org.junit.Test
 
