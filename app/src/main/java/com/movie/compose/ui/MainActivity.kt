@@ -37,10 +37,7 @@ class MainActivity : FragmentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    val items = remember {
-                        viewModel.screenData()
-                    }
-                    MovieScreen(items)
+                    MovieScreen(movies)
                 }
             }
         }

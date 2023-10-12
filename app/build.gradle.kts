@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.weather.compose"
+    namespace = "com.movie.compose"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.weather.compose"
+        applicationId = "com.movie.compose"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -65,6 +65,7 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     // Coroutines for asynchronous programming
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+    implementation("io.coil-kt:coil-compose:2.4.0")
 
     testImplementation("junit:junit:4.13.2")
 

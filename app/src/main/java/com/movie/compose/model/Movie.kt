@@ -1,3 +1,3 @@
 package com.movie.compose.model
 
-data class Movie(val title:String)
+data class Movie(val title:String, val year: String = "", val poster:String = "")

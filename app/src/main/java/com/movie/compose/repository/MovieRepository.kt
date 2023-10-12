@@ -8,13 +8,17 @@ class MovieRepository {
     private val movieService = RetrofitInstance.movieService
 
     suspend fun getMovies(search: String ="Batman", page: Int=1): List<Movie>? {
-        val movieDTOs = movieService.getMovies(search, page, "b9418cd6").search
-        return movieDTOs?.convert()
+       return movieService.getMovies(search, page, "b9418cd6")
+           .search
+           .convert()
+
     }
 }
 
 private fun List<SearchItem?>?.convert(): List<Movie> {
     return this?.map {
-        Movie(it?.title?:"")
+        Movie(it?.title?:"",
+             it?.year?:"",
+            it?.poster?:"")
     }?: emptyList()
 }
