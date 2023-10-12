@@ -1,21 +1,17 @@
 package com.movie.compose.ui.screen
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -34,11 +30,13 @@ fun MovieRow(item: Movie, modifier: Modifier = Modifier) {
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surface,
         ),
-        modifier = Modifier.padding(8.dp).height(160.dp)
+        modifier = modifier
+            .padding(8.dp)
+            .height(160.dp)
     ) {
         Row(
             modifier = modifier
-                       .fillMaxWidth(),
+                .fillMaxWidth(),
             horizontalArrangement = Arrangement.Start
         ) {
 
@@ -54,7 +52,7 @@ fun MovieRow(item: Movie, modifier: Modifier = Modifier) {
                 Text(
                     text = item.title,
                     textAlign = TextAlign.Start,
-                    modifier = Modifier.padding(start = 16.dp,top = 32.dp),
+                    modifier = Modifier.padding(start = 16.dp, top = 32.dp),
                     style = MaterialTheme.typography.headlineLarge,
                     maxLines = 1
                 )

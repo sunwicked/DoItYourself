@@ -18,12 +18,12 @@ class MainViewModel : ViewModel() {
     val movies: StateFlow<List<Movie>> = _movies
 
     init {
-        fetchMovies()
+        fetchMovies(1)
     }
-    fun fetchMovies() {
+    fun fetchMovies(page:Int = 1 ) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val movies = repository.getMovies()
+                val movies = repository.getMovies("Batman", page)
                 _movies.value = movies?: emptyList()
                 Log.e("TAG", "fetchMovies: $movies", )
             } catch (e: Exception) {
