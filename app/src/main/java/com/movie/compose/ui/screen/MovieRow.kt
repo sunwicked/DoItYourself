@@ -12,6 +12,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -45,7 +46,9 @@ fun MovieRow(item: Movie, modifier: Modifier = Modifier) {
                 placeholder = painterResource(id = R.drawable.ic_launcher_background),
                 error = painterResource(id = R.drawable.ic_launcher_background),
                 contentDescription = "The delasign logo",
-                modifier = Modifier.fillMaxWidth(fraction = 0.3f)
+                modifier = Modifier.fillMaxWidth(fraction = 0.3f),
+                contentScale = ContentScale.Crop
+
             )
 
             Column {
@@ -53,8 +56,8 @@ fun MovieRow(item: Movie, modifier: Modifier = Modifier) {
                     text = item.title,
                     textAlign = TextAlign.Start,
                     modifier = Modifier.padding(start = 16.dp, top = 32.dp),
-                    style = MaterialTheme.typography.headlineLarge,
-                    maxLines = 1
+                    style = MaterialTheme.typography.headlineMedium,
+                    maxLines = 2
                 )
                 Text(
                     text = item.year,
