@@ -15,13 +15,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.movie.compose.model.Movie
-import com.movie.compose.ui.Footer
+import com.movie.compose.model.Footer
+import com.movie.compose.model.ListItem
 import com.movie.compose.ui.theme.MovieComposeTheme
 
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun MovieScreen(movies: List<Any>, onLast:()->Unit ) {
+fun MovieScreen(movies: List<ListItem>, onLast:()->Unit ) {
 
 
 

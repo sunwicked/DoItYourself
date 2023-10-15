@@ -8,7 +8,8 @@ import com.movie.compose.model.Movie
 import com.movie.compose.repository.MovieRepository
 import com.movie.compose.repository.remote.ApiResult
 import com.movie.compose.repository.remote.models.SearchItem
-import com.movie.compose.ui.Footer
+import com.movie.compose.model.Footer
+import com.movie.compose.model.ListItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,8 +20,8 @@ class MainViewModel : ViewModel() {
 
     private val repository = MovieRepository()
 
-    private val _movies = MutableStateFlow<List<Any>>(emptyList())
-    val movies: StateFlow<List<Any>> = _movies
+    private val _movies = MutableStateFlow<List<ListItem>>(emptyList())
+    val movies: StateFlow<List<ListItem>> = _movies
 
 
     private var page = 1
@@ -42,7 +43,7 @@ class MainViewModel : ViewModel() {
                     is ApiResult.Success -> {
                         val movies = response.data.search.convert()
                         canPaginate = movies.size == 10
-                        val updatedList: MutableList<Any> = _movies.value.toMutableList()
+                        val updatedList: MutableList<ListItem> = _movies.value.toMutableList()
                         updatedList.addAll(movies)
 
                         updatedList.removeAll {
@@ -90,7 +91,7 @@ class MainViewModel : ViewModel() {
     }
 
     private fun addFooter() {
-        val footerEnabledList: MutableList<Any> = _movies.value.toMutableList()
+        val footerEnabledList: MutableList<ListItem> = _movies.value.toMutableList()
         footerEnabledList.add(Footer())
         _movies.value = footerEnabledList.toList()
     }
