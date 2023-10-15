@@ -2,7 +2,7 @@ package com.movie.compose.repository.remote.models
 
 import com.google.gson.annotations.SerializedName
 
-data class Response(
+data class MovieResponse(
 
 	@field:SerializedName("Response")
 	val response: String? = null,
@@ -31,3 +31,4 @@ data class SearchItem(
 	@field:SerializedName("Title")
 	val title: String? = null
 )
+

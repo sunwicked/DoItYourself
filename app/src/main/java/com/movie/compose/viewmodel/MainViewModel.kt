@@ -4,7 +4,10 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.movie.compose.model.ListState
+import com.movie.compose.model.Movie
 import com.movie.compose.repository.MovieRepository
+import com.movie.compose.repository.remote.ApiResult
+import com.movie.compose.repository.remote.models.SearchItem
 import com.movie.compose.ui.Footer
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -34,27 +37,35 @@ class MainViewModel : ViewModel() {
             if (shouldFetchMovies()) {
                 listState = if (page == 1) ListState.LOADING else ListState.PAGINATING
 
-                try {
-                    val movies = repository.getMovies("Batman", page)
-                    canPaginate = movies?.size == 10
-                    val updatedList: MutableList<Any> = _movies.value.toMutableList()
-                    if (movies != null) {
+
+                when (val response = repository.getMovies("Batman", page)) {
+                    is ApiResult.Success -> {
+                        val movies = response.data.search.convert()
+                        canPaginate = movies.size == 10
+                        val updatedList: MutableList<Any> = _movies.value.toMutableList()
                         updatedList.addAll(movies)
+
+                        updatedList.removeAll {
+                            it is Footer
+                        }
+
+                        _movies.value = updatedList
+
+                        listState = ListState.IDLE
+
+                        if (canPaginate) page++
                     }
 
-                    updatedList.removeAll {
-                        it is Footer
+                    is ApiResult.Error -> {
+                        // show Error Snackbar
+                        Log.e("TAG", "fetchMovies: ${response.code} and ${response.message}")
                     }
 
-                    _movies.value = updatedList
-
-                    listState = ListState.IDLE
-
-                    if (canPaginate) page++
-                } catch (e: Exception) {
-                    // Handle error
-                    Log.e("TAG", "fetchMovies: $e")
+                    is ApiResult.Exception -> {
+                        Log.e("TAG", "fetchMovies: ${response.e}")
+                    }
                 }
+
 
             } else {
                 listState = if (page == 1) ListState.ERROR else ListState.PAGINATION_EXHAUST
@@ -85,4 +96,15 @@ class MainViewModel : ViewModel() {
     }
 
 
+}
+
+private fun List<SearchItem?>?.convert(): List<Movie> {
+    return this?.map {
+        Movie(
+            it?.title ?: "",
+            it?.year ?: "",
+            it?.poster ?: "",
+            it?.imdbID ?: ""
+        )
+    } ?: emptyList()
 }
