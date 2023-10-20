@@ -31,16 +31,11 @@ class MainActivity : FragmentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    MovieScreen(movies) { onLast() }
+                    MovieScreen(movies) { viewModel::updatePage } // https://medium.com/icerock/optimize-or-die-profiling-and-optimization-in-jetpack-compose-a165c8897b3f
                 }
             }
         }
     }
-
-    private fun onLast(){
-        viewModel.updatePage()
-    }
-
 }
 
 
