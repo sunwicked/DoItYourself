@@ -13,5 +13,7 @@ Adding a bunch of ToDos for you to pick your adventure.
 - [ ] Add Bottom Menu Navigation[https://developer.android.com/jetpack/compose/navigation]
 - [ ] Add Pull to Refresh [https://developer.android.com/develop/ui/views/touch-and-input/swipe/add-swipe-interface]
 - [ ] Add Loading and Error States
+
+
   ![enter image description here](https://i.postimg.cc/kMcHHfpm/Screenshot-20231020-213018.png)
 ```
